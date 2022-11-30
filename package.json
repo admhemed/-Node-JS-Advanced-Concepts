@@ -1,0 +1,23 @@
+{
+  "name": "node-js-advanced-concepts",
+  "version": "1.0.0",
+  "description": "Demonstrating my progress on the udemy course  Node JS: Advanced Concepts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/admhemed/Node-JS-Advanced-Concepts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/admhemed/Node-JS-Advanced-Concepts/issues"
+  },
+  "homepage": "https://github.com/admhemed/Node-JS-Advanced-Concepts#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
