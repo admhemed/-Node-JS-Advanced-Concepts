@@ -19,5 +19,8 @@
   "homepage": "https://github.com/admhemed/Node-JS-Advanced-Concepts#readme",
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "prettier": "2.8.0"
   }
 }
