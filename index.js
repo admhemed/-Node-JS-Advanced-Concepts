@@ -1,10 +1,12 @@
-const cluster = require("cluster");
-console.log("cluster.isMaster", cluster.isMaster);
-// Is the file being executed in master mode?
-if (cluster.isMaster) {
+const { env } = process;
+env.UV_THREADPOOL_SIZE = 1;
+const { isMaster, fork } = require("cluster");
+console.log("cluster.isMaster", isMaster);
+// Is the file being executed in master mo de?
+if (isMaster) {
   // Cause index.js to be executed *again* but in child mode
-  cluster.fork();
-  cluster.fork();
+  fork();
+  fork();
   // cluster.fork();
   // cluster.fork();
 } else {
