@@ -1,32 +1,34 @@
-const { env } = process;
-env.UV_THREADPOOL_SIZE = 1;
-const { isMaster, fork } = require("cluster");
-console.log("cluster.isMaster", isMaster);
-// Is the file being executed in master mo de?
-if (isMaster) {
-  // Cause index.js to be executed *again* but in child mode
-  fork();
-  fork();
-  // cluster.fork();
-  // cluster.fork();
-} else {
-  // I'm a child, I'm going to act like a server and do nothing else
-  const express = require("express");
-  const app = express();
+import { from } from "rxjs";
+import { mergeMap, reduce, toArray, map } from "rxjs/operators";
 
-  function doWork(duration) {
-    const start = Date.now();
-    while (Date.now() - start < duration) {}
-  }
+var foo = from([
+  [1, 2, 3, 4],
+  [5, 6, 7, 8],
+  [9, 10, 11, 12],
+]);
 
-  app.get("/", (req, res) => {
-    doWork(15000);
-    res.send("Hi there");
-  });
-
-  app.get("/fast", (req, res) => {
-    res.send("This was fast!");
-  });
-
-  app.listen(3001);
-}
+// row sum
+foo
+  .pipe(
+    mergeMap((row) => {
+      return from(row).pipe(
+        reduce((acc, currentVal) => {
+          return acc + currentVal;
+        }, 0)
+      );
+    }),
+    reduce((acc, currentVal) => {
+      return acc + currentVal;
+    }, 0)
+  )
+  .subscribe(
+    function (x) {
+      console.log("sum of matrix is " + x);
+    },
+    function (err) {
+      console.log("error " + err);
+    },
+    function () {
+      console.log("done");
+    }
+  );
